@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
     compatibilityDate: "2024-08-23",
     devtools: { enabled: true },
-    ssr: true,
+    ssr: false,
     css: ["~/assets/css/main.css"],
     postcss: {
         plugins: {
@@ -21,7 +21,6 @@ export default defineNuxtConfig({
         "@nuxt/icon",
         "@nuxtjs/color-mode",
         "@vueuse/nuxt",
-        "@nuxt/image",
     ],
     app: {
         head: {

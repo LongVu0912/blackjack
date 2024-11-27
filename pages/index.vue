@@ -68,15 +68,6 @@ const removeACard = (card: Card) => {
 const showedCardSet = computed(() => {
     return new Set([...deck.value.playerCards.map(card => `${card.name}${card.suit}`), ...deck.value.openedCards.map(card => `${card.name}${card.suit}`)]);
 });
-
-const rows = computed(() => {
-    const rows = [];
-    for (let i = 0; i < allCards.length; i += 13) {
-        rows.push(allCards.slice(i, i + 13));
-    }
-    return rows;
-});
-
 </script>
 
 <template>
@@ -88,7 +79,7 @@ const rows = computed(() => {
     <div class="flex w-full flex-col items-center justify-center gap-4">
         <div class="flex flex-row items-center gap-8">
             <div class="relative cursor-pointer select-none" @click="openAddCardModal">
-                <NuxtImg height="200" src="/cards/blue_back.png" />
+                <img class="h-48" src="/cards/blue_back.png" />
                 <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-800">
                     {{ deck.cards.length }}
                 </div>
@@ -99,41 +90,42 @@ const rows = computed(() => {
             </div>
         </div>
 
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center gap-2">
             <div class="text-primary-500 dark:text-primary-400 text-4xl font-bold">
                 {{ playerPoint }}
             </div>
+
             <div class="flex flex-row gap-4">
                 <div v-for="point in [16, 17, 18, 19, 20, 21]" :key="point"
-                     class="flex flex-row items-center gap-2 text-2xl">
+                     class="flex flex-row flex-wrap items-end gap-1 text-2xl">
                     <div class="font-bold">{{ point }}:</div>
-                    <div class="font-medium">
+                    <div class="text-primary-500 dark:text-primary-400 text-xl font-medium">
                         {{ cases[point as keyof Cases] }}%
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-row gap-4 text-2xl">
-                <div class="flex flex-row gap-2">
+                <div class="flex flex-row items-end gap-2">
                     <div class="font-bold">An toàn:</div>
-                    <div class="font-medium text-green-500 dark:text-green-400">
+                    <div class="text-xl font-medium text-green-500 dark:text-green-400">
                         {{ 100 - cases[22] }}%
                     </div>
                 </div>
 
-                <div class="flex flex-row gap-2">
+                <div class="flex flex-row items-end gap-2">
                     <div class="font-bold">Quắc:</div>
-                    <div class="font-medium text-red-500 dark:text-red-400">
+                    <div class="text-xl font-medium text-red-500 dark:text-red-400">
                         {{ cases[22] }}%
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="flex flex-row gap-2">
-            <NuxtImg height="200" :src="'/cards/' + (card.name + card.suit) + '.png'"
-                     v-for="(card, cardIndex) in deck.playerCards"
-                     :key="cardIndex" />
+        <div class="grid w-full grid-cols-3 items-center justify-center gap-1 lg:grid-cols-5">
+            <img class="h-auto w-auto" :src="'/cards/' + (card.name + card.suit) + '.png'"
+                 v-for="(card, cardIndex) in deck.playerCards"
+                 :key="cardIndex" />
         </div>
     </div>
 
@@ -149,13 +141,11 @@ const rows = computed(() => {
                 </div>
             </template>
 
-            <div class="item flex flex-col items-center justify-center gap-1">
-                <div v-for="(row, rowIndex) in rows" :key="rowIndex" class="flex flex-row gap-1">
-                    <NuxtImg height="150" :src="'/cards/' + (card.name + card.suit) + '.png'"
-                             v-for="(card, cardIndex) in row"
-                             :class="{ 'opacity-40 cursor-not-allowed': showedCardSet.has(card.name + card.suit), 'cursor-pointer': !showedCardSet.has(card.name + card.suit) }"
-                             :key="cardIndex" @click="addACard(card)" />
-                </div>
+            <div class="grid w-full grid-cols-4 items-center justify-center gap-1 lg:grid-cols-13">
+                <img class="h-auto w-full" :src="'/cards/' + (card.name + card.suit) + '.png'"
+                     v-for="(card, cardIndex) in allCards"
+                     :class="{ 'opacity-40 cursor-not-allowed': showedCardSet.has(card.name + card.suit), 'cursor-pointer': !showedCardSet.has(card.name + card.suit) }"
+                     :key="cardIndex" @click="addACard(card)" />
             </div>
         </UCard>
     </UModal>
@@ -172,13 +162,11 @@ const rows = computed(() => {
                 </div>
             </template>
 
-            <div class="item flex flex-col items-center justify-center gap-1">
-                <div v-for="(row, rowIndex) in rows" :key="rowIndex" class="flex flex-row gap-1">
-                    <NuxtImg height="150" :src="'/cards/' + (card.name + card.suit) + '.png'"
-                             v-for="(card, cardIndex) in row"
-                             :class="{ 'opacity-40 cursor-not-allowed': showedCardSet.has(card.name + card.suit), 'cursor-pointer': !showedCardSet.has(card.name + card.suit) }"
-                             :key="cardIndex" @click="removeACard(card)" />
-                </div>
+            <div class="grid w-full grid-cols-4 items-center justify-center gap-1 lg:grid-cols-13">
+                <img class="h-auto w-full" :src="'/cards/' + (card.name + card.suit) + '.png'"
+                     v-for="(card, cardIndex) in allCards"
+                     :class="{ 'opacity-40 cursor-not-allowed': showedCardSet.has(card.name + card.suit), 'cursor-pointer': !showedCardSet.has(card.name + card.suit) }"
+                     :key="cardIndex" @click="removeACard(card)" />
             </div>
         </UCard>
     </UModal>

@@ -55,7 +55,7 @@ export const DeckRepository = () => {
     const pickRandomCard = () => {
         if (deck.cards.length === 0) return;
 
-        if (countPlayerPoint() >= 21) return;
+        if (countPlayerPoint() >= 22) return;
 
         const randomIndex = Math.floor(Math.random() * deck.cards.length);
         const [pickedCard] = deck.cards.splice(randomIndex, 1);
