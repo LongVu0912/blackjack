@@ -1,0 +1,27 @@
+{
+    "name": "blackjack",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "clean": "nuxi cleanup && yarn cache clean",
+        "update": "yarn upgrade-interactive --latest"
+    },
+    "dependencies": {
+        "@nuxt/icon": "^1.5.1",
+        "@nuxt/ui": "^2.18.4",
+        "@nuxtjs/color-mode": "^3.4.4",
+        "@vueuse/nuxt": "^11.0.3",
+        "@nuxt/image": "^1.8.0",
+        "nuxt": "^3.12.4",
+        "vue": "latest"
+    },
+    "devDependencies": {
+        "@iconify-json/heroicons": "^1.2.0",
+        "@iconify-json/mingcute": "^1.2.0"
+    }
+}

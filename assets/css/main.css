@@ -1,0 +1,22 @@
+:root {
+    --sidebar-width: 280px;
+}
+
+/* * Color or background app */
+.bg-app-primary {
+    @apply bg-white dark:bg-gray-900;
+}
+
+.bg-content {
+    @apply bg-gray-100 dark:bg-gray-800;
+}
+
+/* * Link active of side bar */
+.link-active {
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-50 dark:hover:bg-gray-700;
+}
+
+/* Apply transition to body */
+body {
+    @apply transition-colors duration-500;
+}
