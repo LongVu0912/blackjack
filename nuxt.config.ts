@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     ],
     app: {
         head: {
-            title: "Xì dách",
+            title: "Xì Dách",
             htmlAttrs: {
                 lang: "vi",
             },

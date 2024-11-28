@@ -79,14 +79,16 @@ const showedCardSet = computed(() => {
     <div class="flex w-full flex-col items-center justify-center gap-4">
         <div class="flex flex-row items-center gap-8">
             <div class="relative cursor-pointer select-none" @click="openAddCardModal">
-                <img class="h-48" src="/cards/blue_back.png" />
+                <img class="h-48 opacity-60" src="/cards/blue_back.png" />
                 <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-800">
                     {{ deck.cards.length }}
                 </div>
             </div>
-            <div>
-                <UButton icon="mingcute:delete-2-line" size="xl" variant="outline" color="red"
-                         @click="openRemoveCardModal" />
+            <div class="relative cursor-pointer select-none" @click="openRemoveCardModal">
+                <img class="h-48 opacity-60" src="/cards/red_back.png" />
+                <div class="absolute inset-0 flex items-center justify-center text-3xl font-bold text-gray-800">
+                    {{ deck.openedCards.length }}
+                </div>
             </div>
         </div>
 
@@ -122,8 +124,8 @@ const showedCardSet = computed(() => {
             </div>
         </div>
 
-        <div class="grid w-full grid-cols-3 items-center justify-center gap-1 lg:grid-cols-5">
-            <img class="h-auto w-auto" :src="'/cards/' + (card.name + card.suit) + '.png'"
+        <div class="grid w-full grid-cols-3 items-center justify-center gap-1 lg:flex lg:flex-wrap lg:justify-center">
+            <img class="h-48 w-auto" :src="'/cards/' + (card.name + card.suit) + '.png'"
                  v-for="(card, cardIndex) in deck.playerCards"
                  :key="cardIndex" />
         </div>
